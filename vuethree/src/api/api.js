@@ -1,7 +1,7 @@
 import serve from './serve'
 
-const getCoin = function () {
-    return serve.get('/mycoin')
+const getCoin = function (current, size) {
+    return serve.get('/find?current=' + current + "&size=" + size)
 }
 
 
