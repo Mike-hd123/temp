@@ -1,0 +1,25 @@
+{
+  "name": "vuethree",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "axios": "^1.5.1",
+    "element-plus": "^2.3.14",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
+  },
+  "devDependencies": {
+    "@iconify-json/ep": "^1.1.12",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "unplugin-auto-import": "^0.16.7",
+    "unplugin-icons": "^0.17.1",
+    "unplugin-vue-components": "^0.25.2",
+    "vite": "^4.4.9"
+  }
+}
