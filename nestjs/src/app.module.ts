@@ -15,7 +15,9 @@ import { coinModule } from './com/coin/coin.module';
       type: "sqlite",
       database: "test.sqlite",
       autoLoadEntities: true,
-      synchronize: true
+      synchronize: true,
+      //开启日志 - 打印sql
+      // logging: true
     }),
     //实体
     jobModule,

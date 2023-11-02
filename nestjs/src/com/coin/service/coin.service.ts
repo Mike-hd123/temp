@@ -15,11 +15,20 @@ export class CoinService {
     )
   }
 
-  find(current, pagesize) {
-    return this.CoinEntity.createQueryBuilder().skip((current - 1) * pagesize).take(pagesize).getManyAndCount()
-  }
-
-  test() {
-    console.log('123')
+  find(page, query) {
+    const { current, size } = page
+    const { name, names } = query
+    const queryConditionList = []
+    if (name) {
+      queryConditionList.push("main_.name LIKE :name")
+    }
+    if (names) {
+      queryConditionList.push("main_.name in (:...names)")
+    }
+    const queryCondition = queryConditionList.join(" AND ")
+    let q = this.CoinEntity.createQueryBuilder("main_").select(["main_.name", "main_.price_usd", "main_.price_cny"])
+      .andWhere(queryCondition, { name: `%${name}%`, names: names ? names.split(",") : '' })  
+    if (current && size) q.skip((current - 1) * size).take(size)
+    return q.getManyAndCount()
   }
 }
