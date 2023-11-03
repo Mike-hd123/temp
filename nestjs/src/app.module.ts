@@ -5,6 +5,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 //自定义包
 import { jobModule } from './job/job.module';
 import { coinModule } from './com/coin/coin.module';
+import { propertyModule } from './com/property/property.module'
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { coinModule } from './com/coin/coin.module';
     }),
     //实体
     jobModule,
-    coinModule
+    coinModule,
+    propertyModule
   ]
 })
 export class AppModule { }

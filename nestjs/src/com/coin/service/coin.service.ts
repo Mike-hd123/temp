@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CoinEntity } from '../entity/coin.entity';
+import { Coin } from '../entity/coin.entity';
 
 @Injectable()
 export class CoinService {
-  constructor(@InjectRepository(CoinEntity) private CoinEntity: Repository<CoinEntity>) { }
+  constructor(@InjectRepository(Coin) private CoinEntity: Repository<Coin>) { }
 
   create(coinList) {
     this.CoinEntity.createQueryBuilder().delete().execute().then(
-      () => this.CoinEntity.createQueryBuilder().insert().into(CoinEntity).values(coinList).execute().then(
+      () => this.CoinEntity.createQueryBuilder().insert().into(Coin).values(coinList).execute().then(
         () => console.log('更新:' + new Date().toLocaleTimeString())
       )
     )
