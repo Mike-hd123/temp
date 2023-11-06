@@ -1,32 +1,30 @@
 <template>
-    <body>
-        <el-card>
-            <el-form :model="form" :inline="true" label-width="120px" @submit.native.prevent>
-                <el-form-item label="币种">
-                    <el-input v-model="form.name" @change="onSearch" />
-                </el-form-item>
-                <el-form-item>
-                    <el-button :icon="Search" circle type="primary" @click="onSearch">
-                        <template #icon>
-                            <el-icon>
-                                <i-ep-search />
-                            </el-icon>
-                        </template>
-                    </el-button>
-                </el-form-item>
-            </el-form>
-            <el-table :data="coinData" stripe height="600" style="width: 100%">
-                <el-table-column prop="name" label="币种" />
-                <el-table-column prop="price_cny" label="现价(美元)" />
-                <el-table-column prop="price_usd" label="现价(人民币)" />
-            </el-table>
-            <div style="display: flex;justify-content: center;">
-                <el-pagination :total="total" layout="sizes, prev, pager, next, jumper, total" :page-sizes="[5, 10, 20, 50]"
-                    v-model:current-page="pageCurrent" v-model:page-size="pageSize" @size-change="getData"
-                    @current-change="getData" />
-            </div>
-        </el-card>
-    </body>
+    <el-card>
+        <el-form :model="form" :inline="true" label-width="120px" @submit.native.prevent>
+            <el-form-item label="币种">
+                <el-input v-model="form.name" @change="onSearch" />
+            </el-form-item>
+            <el-form-item>
+                <el-button :icon="Search" circle type="primary" @click="onSearch">
+                    <template #icon>
+                        <el-icon>
+                            <i-ep-search />
+                        </el-icon>
+                    </template>
+                </el-button>
+            </el-form-item>
+        </el-form>
+        <el-table :data="coinData" stripe height="750" style="width: 100%">
+            <el-table-column prop="name" label="币种" />
+            <el-table-column prop="price_usd" label="现价(美元)" />
+            <el-table-column prop="price_cny" label="现价(人民币)" />
+        </el-table>
+        <div style="display: flex;justify-content: center;padding-top: 13px;">
+            <el-pagination :total="total" layout="sizes, prev, pager, next, jumper, total" :page-sizes="[5, 10, 20, 50]"
+                v-model:current-page="pageCurrent" v-model:page-size="pageSize" @size-change="getData"
+                @current-change="getData" />
+        </div>
+    </el-card>
 </template>
 
 <script setup>

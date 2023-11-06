@@ -13,7 +13,7 @@
 
 <script setup>
 import { ref, markRaw } from "vue";
-import { House } from '@element-plus/icons-vue'
+import { Coin, Postcard } from '@element-plus/icons-vue'
 
 const props = defineProps({
     collapse: Boolean
@@ -23,7 +23,11 @@ const radiusGroup = ref([
     {
         name: "home",
         url: "/",
-        icon: markRaw(House)
+        icon: markRaw(Coin)
+    }, {
+        name: "property",
+        url: "/property",
+        icon: markRaw(Postcard)
     }
 ]);
 </script>
