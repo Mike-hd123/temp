@@ -1,7 +1,7 @@
-import { Controller, Get, Request } from '@nestjs/common';
+import { Controller, Get, Redirect, Request } from '@nestjs/common';
 import { CoinService } from '../service/coin.service';
 
-@Controller()
+@Controller('api')
 export class CoinController {
   constructor(private readonly CoinService: CoinService) { }
 

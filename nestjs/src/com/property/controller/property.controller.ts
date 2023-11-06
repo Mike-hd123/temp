@@ -1,7 +1,7 @@
 import { Controller, Get, Request } from '@nestjs/common';
 import { PropertyService } from '../service/property.service';
 
-@Controller('property')
+@Controller('api/property')
 export class PropertyController {
   constructor(private readonly propertyService: PropertyService) { }
 
@@ -15,7 +15,7 @@ export class PropertyController {
     var obj = {
       name: 'yyy'
     }
-    return this.propertyService.update(req.query.id,obj) 
+    return this.propertyService.update(req.query.id, obj)
   }
 
   @Get('delete')
