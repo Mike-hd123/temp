@@ -1,21 +1,19 @@
-import { Controller, Get, Request } from '@nestjs/common';
+import { Controller, Get, Post, Request, Body } from '@nestjs/common';
 import { PropertyService } from '../service/property.service';
+import { Property } from '../entity/property.entity';
 
 @Controller('api/property')
 export class PropertyController {
   constructor(private readonly propertyService: PropertyService) { }
 
-  @Get('add')
-  add() {
-    return this.propertyService.create()
+  @Post('add')
+  add(@Body() property: Property) {
+    return this.propertyService.create(property)
   }
 
-  @Get('update')
-  updated(@Request() req) {
-    var obj = {
-      name: 'yyy'
-    }
-    return this.propertyService.update(req.query.id, obj)
+  @Post('update')
+  updated(@Body() property: Property) {
+    return this.propertyService.update(property)
   }
 
   @Get('delete')

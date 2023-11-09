@@ -7,18 +7,20 @@ import { Property, propertyType } from '../entity/property.entity';
 export class PropertyService {
   constructor(@InjectRepository(Property) private property: Repository<Property>) { }
 
-  create() {
-    return this.property.save({ name: 'xxx行', type: propertyType.coin, total: 4000, interest: 0.52, update: new Date() })
+  create(property) {
+    property.update = new Date()
+    return this.property.save(property)
   }
 
-  update(id,obj) {
-    return this.property.update(id,obj)
+  update(property) {
+    property.update = new Date()
+    return this.property.update(property.id, property)
   }
 
   delete(id) {
     return this.property.delete(id)
   }
-  
+
   find() {
     let q = this.property.createQueryBuilder()
     return q.getManyAndCount()
