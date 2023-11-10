@@ -65,7 +65,9 @@
                     <el-input v-model="form.name" />
                 </el-form-item>
                 <el-form-item label="类型">
-                    <el-input v-model="form.type" />
+                    <el-select v-model="form.type" placeholder="Select" width="100%">
+                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="数量">
                     <el-input v-model="form.total" />
@@ -99,6 +101,20 @@ const pageSize = ref(10)
 const total = ref(0)
 const form = ref({})
 const formSearch = ref({})
+const options = [
+    {
+        label: '加密货币',
+        value: 'coin'
+    },
+    {
+        label: '存款',
+        value: 'deposit'
+    },
+    {
+        label: '负债',
+        value: 'liabilities'
+    }
+]
 
 getData()
 
