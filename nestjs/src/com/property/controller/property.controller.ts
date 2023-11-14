@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Request, Body } from '@nestjs/common';
 import { PropertyService } from '../service/property.service';
-import { Property } from '../entity/property.entity';
+import { Property, getPropertyTypeName } from '../entity/property.entity';
 
 @Controller('api/property')
 export class PropertyController {
@@ -21,7 +21,7 @@ export class PropertyController {
     var id = req.query.id
     return this.propertyService.delete(id)
   }
-  
+
 
   @Get('list')
   async find() {
@@ -30,7 +30,11 @@ export class PropertyController {
   }
 
   @Get("cake")
-  cake(){
-    return this.propertyService.cake()
+  async cake() {
+    var res = await this.propertyService.cake()
+    res.forEach(e => {
+      e.name = getPropertyTypeName(e.name)
+    })
+    return res
   }
 }

@@ -27,11 +27,24 @@ export class Property {
     update: Date
 }
 
+export function getPropertyTypeName(name) {
+    var value = '';
+    switch (name) {
+        case ('coin'):
+            value = propertyType.coin
+            break;
+        case ('liabilities'):
+            value = propertyType.liabilities
+            break;
+        case ('deposit'):
+            value = propertyType.deposit
+            break;
+    }
+    return value
+}
+
 export enum propertyType {
-    //存款
-    deposit = 'deposit',
-    //负债
-    liabilities = 'liabilities',
-    //货币
-    coin = 'coin'
+    deposit = '存款',
+    liabilities = '负债',
+    coin = '货币'
 }

@@ -1,97 +1,105 @@
 <template>
-    <el-card>
-        <el-form :model="formSearch" :inline="true" label-width="120px" @submit.native.prevent>
-            <el-form-item label="名称">
-                <el-input v-model="formSearch.name" />
-            </el-form-item>
-            <el-form-item>
-                <!-- 搜索按钮 -->
-                <el-button circle type="primary">
-                    <template #icon>
-                        <el-icon>
-                            <i-ep-search />
-                        </el-icon>
-                    </template>
-                </el-button>
-                <!-- 添加按钮 -->
-                <el-button circle type="success" @click="add">
-                    <template #icon>
-                        <el-icon>
-                            <i-ep-CirclePlus />
-                        </el-icon>
-                    </template>
-                </el-button>
-            </el-form-item>
-        </el-form>
-        <el-table :data="listData" stripe height="650" style="width: 100%">
-            <el-table-column prop="name" label="名称" />
-            <el-table-column prop="type" label="类型">
-                <template #default="scope">
-                    <el-tag v-if="scope.row.type == 'coin'" type="success">加密货币</el-tag>
-                    <el-tag v-else-if="scope.row.type == 'deposit'">存款</el-tag>
-                    <el-tag v-else-if="scope.row.type == 'liabilities'" type="danger">负责</el-tag>
-                </template>
-            </el-table-column>
-            <el-table-column prop="total" label="数量" />
-            <el-table-column prop="interest" label="利率" :formatter="formatInterest" />
-            <el-table-column prop="update" label="更新日期" :formatter="formatDate" />
-            <el-table-column prop="option" label="操作">
-                <template #default="scop">
-                    <el-button type="primary" circle @click="edit(scop.row)">
-                        <template #icon>
-                            <el-icon>
-                                <i-ep-Edit />
-                            </el-icon>
-                        </template>
-                    </el-button>
-                    <el-button type="danger" circle @click="del(scop.row.id)">
-                        <template #icon>
-                            <el-icon>
-                                <i-ep-Delete />
-                            </el-icon>
-                        </template>
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <div style="display: flex;justify-content: center;padding-top: 13px;">
-            <el-pagination :total="total" layout="sizes, prev, pager, next, jumper, total" :page-sizes="[5, 10, 20, 50]"
-                v-model:current-page="pageCurrent" v-model:page-size="pageSize" @size-change="getData"
-                @current-change="getData" />
-        </div>
-        <el-dialog v-model="dialogVisible" :title="option" width="30%">
-            <el-form label-position="left" label-width="100px" :model="form" style="max-width: 460px">
+    <el-tabs type="border-card">
+        <el-tab-pane label="List">
+            <el-form :model="formSearch" :inline="true" label-width="120px" @submit.native.prevent>
                 <el-form-item label="名称">
-                    <el-input v-model="form.name" />
+                    <el-input v-model="formSearch.name" />
                 </el-form-item>
-                <el-form-item label="类型">
-                    <el-select v-model="form.type" placeholder="Select" style="width:100%;">
-                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="数量">
-                    <el-input v-model="form.total" />
-                </el-form-item>
-                <el-form-item label="利率">
-                    <el-input v-model="form.interest" />
+                <el-form-item>
+                    <!-- 搜索按钮 -->
+                    <el-button circle type="primary">
+                        <template #icon>
+                            <el-icon>
+                                <i-ep-search />
+                            </el-icon>
+                        </template>
+                    </el-button>
+                    <!-- 添加按钮 -->
+                    <el-button circle type="success" @click="add">
+                        <template #icon>
+                            <el-icon>
+                                <i-ep-CirclePlus />
+                            </el-icon>
+                        </template>
+                    </el-button>
                 </el-form-item>
             </el-form>
-            <template #footer>
-                <span class="dialog-footer">
-                    <el-button @click="dialogVisible = false">取消</el-button>
-                    <el-button type="primary" @click="comfine">
-                        {{ option }}
-                    </el-button>
-                </span>
-            </template>
-        </el-dialog>
-    </el-card>
+            <el-table :data="listData" stripe height="650" style="width: 100%">
+                <el-table-column prop="name" label="名称" />
+                <el-table-column prop="type" label="类型">
+                    <template #default="scope">
+                        <el-tag v-if="scope.row.type == 'coin'" type="success">加密货币</el-tag>
+                        <el-tag v-else-if="scope.row.type == 'deposit'">存款</el-tag>
+                        <el-tag v-else-if="scope.row.type == 'liabilities'" type="danger">负责</el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="total" label="数量" />
+                <el-table-column prop="interest" label="利率" :formatter="formatInterest" />
+                <el-table-column prop="update" label="更新日期" :formatter="formatDate" />
+                <el-table-column prop="option" label="操作">
+                    <template #default="scop">
+                        <el-button type="primary" circle @click="edit(scop.row)">
+                            <template #icon>
+                                <el-icon>
+                                    <i-ep-Edit />
+                                </el-icon>
+                            </template>
+                        </el-button>
+                        <el-button type="danger" circle @click="del(scop.row.id)">
+                            <template #icon>
+                                <el-icon>
+                                    <i-ep-Delete />
+                                </el-icon>
+                            </template>
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div style="display: flex;justify-content: center;padding-top: 13px;">
+                <el-pagination :total="total" layout="sizes, prev, pager, next, jumper, total" :page-sizes="[5, 10, 20, 50]"
+                    v-model:current-page="pageCurrent" v-model:page-size="pageSize" @size-change="getData"
+                    @current-change="getData" />
+            </div>
+            <el-dialog v-model="dialogVisible" :title="option" width="30%">
+                <el-form label-position="left" label-width="100px" :model="form" style="max-width: 460px">
+                    <el-form-item label="名称">
+                        <el-input v-model="form.name" />
+                    </el-form-item>
+                    <el-form-item label="类型">
+                        <el-select v-model="form.type" placeholder="Select" style="width:100%;">
+                            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="数量">
+                        <el-input v-model="form.total" />
+                    </el-form-item>
+                    <el-form-item label="利率">
+                        <el-input v-model="form.interest" />
+                    </el-form-item>
+                </el-form>
+                <template #footer>
+                    <span class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取消</el-button>
+                        <el-button type="primary" @click="comfine">
+                            {{ option }}
+                        </el-button>
+                    </span>
+                </template>
+            </el-dialog>
+        </el-tab-pane>
+        <el-tab-pane label="view">
+            <div style="display: flex;align-items: center;justify-content: center;">
+                <div id="coke" style="width:300px; height:300px;"></div>
+            </div>
+        </el-tab-pane>
+    </el-tabs>
 </template>
 
 
 <script setup>
 import { ref } from "vue"
-import { getProperty, addProperty, editProperty, delProperty,cake } from '../api/api'
+import * as echarts from "echarts";
+import { getProperty, addProperty, editProperty, delProperty, cake } from '../api/api'
 
 const dialogVisible = ref(false)
 const option = ref('添加')
@@ -101,6 +109,58 @@ const pageSize = ref(10)
 const total = ref(0)
 const form = ref({})
 const formSearch = ref({})
+const cakes = {
+    tooltip: {
+        show: false
+    },
+    legend: {
+        top: '5%',
+        left: 'center',
+        formatter: function (name) {
+            let data = cakes.series[0].data
+            let total = 0
+            let tarValue
+            for (let i = 0; i < data.length; i++) {
+                total += data[i].value
+                if (data[i].name == name) {
+                    tarValue = data[i].value
+                }
+            }
+            //计算出百分比
+            let p = Math.round((tarValue / total) * 100) + '%'
+            return `${name}  ${p}`
+        },
+    },
+    series: [
+        {
+            name: 'Access From',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: 40,
+                    fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+            ]
+        }
+    ]
+}
 const options = [
     {
         label: '加密货币',
@@ -122,6 +182,11 @@ function getData() {
     getProperty().then((res) => {
         listData.value = res.data.data
         total.value = res.data.total
+    })
+    cake().then(res => {
+        cakes.series[0].data = res.data
+        var mycharts = echarts.init(document.getElementById('coke'))
+        mycharts.setOption(cakes)
     })
 }
 

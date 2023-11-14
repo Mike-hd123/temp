@@ -27,7 +27,7 @@ export class PropertyService {
   }
 
   cake() {
-    const sql = "select type,sum(total) from property group by type"
+    const sql = "select type as name,sum(total) as value from property group by type"
     return this.dataSource.query(sql)
   }
 }
