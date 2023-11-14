@@ -22,10 +22,15 @@ const delProperty = function (id) {
     return serve({ url: propertyUrl + '/delete', method: 'get', params: { id: id } })
 }
 
+const cake = function () {
+    return serve({ url: propertyUrl + '/cake', method: 'get' })
+}
+
 export {
     getCoin,
     getProperty,
     addProperty,
     editProperty,
-    delProperty
+    delProperty,
+    cake
 }

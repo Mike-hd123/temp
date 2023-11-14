@@ -21,10 +21,16 @@ export class PropertyController {
     var id = req.query.id
     return this.propertyService.delete(id)
   }
+  
 
   @Get('list')
   async find() {
     var res = await this.propertyService.find()
     return { data: res[0], total: res[1] }
+  }
+
+  @Get("cake")
+  cake(){
+    return this.propertyService.cake()
   }
 }

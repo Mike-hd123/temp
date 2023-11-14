@@ -91,7 +91,7 @@
 
 <script setup>
 import { ref } from "vue"
-import { getProperty, addProperty, editProperty, delProperty } from '../api/api'
+import { getProperty, addProperty, editProperty, delProperty,cake } from '../api/api'
 
 const dialogVisible = ref(false)
 const option = ref('添加')
