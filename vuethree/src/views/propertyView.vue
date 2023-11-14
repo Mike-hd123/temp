@@ -91,6 +91,7 @@
             <div style="display: flex;align-items: center;justify-content: center;">
                 <div id="coke" style="width:300px; height:300px;"></div>
             </div>
+            <el-tag>{{ cakes.total }}</el-tag>
         </el-tab-pane>
     </el-tabs>
 </template>
@@ -109,15 +110,16 @@ const pageSize = ref(10)
 const total = ref(0)
 const form = ref({})
 const formSearch = ref({})
-const cakes = {
+const cakes = ref({
     tooltip: {
         show: false
     },
+    total: 0,
     legend: {
         top: '5%',
         left: 'center',
         formatter: function (name) {
-            let data = cakes.series[0].data
+            let data = cakes.value.series[0].data
             let total = 0
             let tarValue
             for (let i = 0; i < data.length; i++) {
@@ -126,6 +128,7 @@ const cakes = {
                     tarValue = data[i].value
                 }
             }
+            cakes.value.total = total
             //计算出百分比
             let p = Math.round((tarValue / total) * 100) + '%'
             return `${name}  ${p}`
@@ -160,7 +163,7 @@ const cakes = {
             ]
         }
     ]
-}
+})
 const options = [
     {
         label: '加密货币',
@@ -184,9 +187,9 @@ function getData() {
         total.value = res.data.total
     })
     cake().then(res => {
-        cakes.series[0].data = res.data
+        cakes.value.series[0].data = res.data
         var mycharts = echarts.init(document.getElementById('coke'))
-        mycharts.setOption(cakes)
+        mycharts.setOption(cakes.value)
     })
 }
 
