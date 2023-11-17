@@ -3,7 +3,7 @@ import coinView from '../views/coinView.vue'
 import propertyView from '../views/propertyView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('#'),
   routes: [
     {
       path: '/',

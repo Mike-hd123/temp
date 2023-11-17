@@ -208,6 +208,7 @@ function edit(row) {
 function comfine() {
     dialogVisible.value = false
     var data = form.value
+    delete data.price
     if (option.value == "添加") {
         addProperty(data).then(res => {
             const { data, status } = res

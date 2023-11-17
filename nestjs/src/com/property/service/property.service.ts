@@ -21,9 +21,13 @@ export class PropertyService {
     return this.property.delete(id)
   }
 
-  find() {
-    let q = this.property.createQueryBuilder()
-    return q.getManyAndCount()
+  async find() {
+    const sql = "select case when type = 'coin' "
+      + " then p.total * c.price_cny else p.total end as price,p.* "
+      + " from property p left join coin c on p.name = c.name"
+    const data = await this.dataSource.query(sql)
+    const size = await this.dataSource.query("select count(*) as total from property")
+    return [data, size[0].total]
   }
 
   cake() {
