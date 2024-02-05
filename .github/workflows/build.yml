@@ -9,19 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     #步骤合集
     steps:
-    # 切换到指定的目录
-    - name: Change Working Directory
-      run: cd nestjs/
       #使用checkout@v3这个action
     - uses: actions/checkout@v3
-      #新建一个名为 actions/checkout@v3 的步骤
-    - name: Use Node.js 16.14.2
+      # Set up Node.js 
+    - name: set Node.js 
       uses: actions/setup-node@v3
       with:
         node-version: '16.14.2'
-    - run: npm install
-    - run: npm run build
     - name: Change Working Directory
-      run: cd vuethree/
+      run: cd nestjs
       run: npm install
-      run: npm run build
+      run: npm build
+    - name: Change Working Directory
+      run: cd ../vuethree
+      run: npm install
+      run: npm build
+    
