@@ -20,11 +20,11 @@ jobs:
       run: |
         cd nestjs
         npm install
-        npm build
+        npm run build
     # 切换工作目录
     - name: build web
       run: |
         cd vuethree
         npm install
-        npm build
+        npm run build
     
