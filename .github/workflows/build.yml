@@ -15,16 +15,32 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: '16.14.2'
-    # 切换工作目录
+    # 编译后端项目
     - name: build back
       run: |
         cd nestjs
         npm install
         npm run build
-    # 切换工作目录
+    # 编译前端项目
     - name: build web
       run: |
         cd vuethree
         npm install
         npm run build
-    
+    # 压缩
+    - name: zip project
+      run: |
+        apt install zip
+        mkdir back
+        cp -r nestjs/dist back
+        cp -r nestjs/node_modules back
+        mkdir web
+        cp -r vuethree/dist web
+        zip -r develop.zip back web
+    # 上传服务器
+    - name: upfile
+      run: |
+        sshpass -p "%SUPER_SECRET%"
+        scp -r develop.zip ubuntu@mike-hd123.tk:~
+      env:
+      SUPER_SECRET: ${{ secrets.PASSWD }}
