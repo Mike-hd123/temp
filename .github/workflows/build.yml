@@ -1,6 +1,8 @@
 name: build
 # 触发 workflow 的事件
-on: release
+on: 
+  release:
+    types: [published]
 # 一个workflow由执行的一项或多项job
 jobs:
   # 一个job任务，任务名为build-back
@@ -55,3 +57,7 @@ jobs:
         script: |
           cd ~
           unzip -oq develop.zip
+          rm -rf develop.zip
+          screen -R app
+          cd back
+          node dist/main.js
