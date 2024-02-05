@@ -43,4 +43,4 @@ jobs:
         sshpass -p "%SUPER_SECRET%"
         scp -r develop.zip ubuntu@mike-hd123.tk:~
       env:
-      SUPER_SECRET: ${{ secrets.PASSWD }}
+        SUPER_SECRET: ${{ secrets.PASSWD }}
