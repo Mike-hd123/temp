@@ -1,6 +1,6 @@
 name: build
 # 触发 workflow 的事件
-on: push
+on: release
 # 一个workflow由执行的一项或多项job
 jobs:
   # 一个job任务，任务名为build-back
@@ -45,3 +45,13 @@ jobs:
         port: 22
         source: 'develop.zip'
         target: '~'
+    # 部署
+    - uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: mike-hd123.tk
+        username: ubuntu
+        password: ${{ secrets.PASSWORD }}
+        port: 22
+        script: |
+          cd ~
+          unzip -oq develop.zip
