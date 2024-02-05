@@ -18,10 +18,14 @@ jobs:
         node-version: '16.14.2'
     - name: Change Working Directory
       run: cd nestjs
+    - name: Install
       run: npm install
+    - name: Build
       run: npm build
     - name: Change Working Directory
       run: cd ../vuethree
+    - name: Install
       run: npm install
+    - name: Build
       run: npm build
     
