@@ -16,7 +16,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16.14.2'
-        cache: 'npm'
     - run: cd nestjs/
     - run: npm install
     - run: npm run build
@@ -34,7 +33,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16.14.2'
-        cache: 'npm'
     - run: cd vuethree/
     - run: npm install
     - run: npm run build
