@@ -35,13 +35,13 @@ jobs:
         cp -r nestjs/node_modules back
         mkdir web
         cp -r vuethree/dist web
-        zip -r develop.zip back web
+        zip -rq develop.zip back web
     # 上传服务器
     - uses: appleboy/scp-action@v0.1.7
       with:
         host: mike-hd123.tk
         username: ubuntu
-        key: ${{ secrets.SERVER_KEY }}
+        password: ${{ secrets.PASSWORD }}
         port: 22
         source: 'develop.zip'
         target: '~'
