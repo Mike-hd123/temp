@@ -11,7 +11,7 @@ jobs:
     steps:
     # 拉取最新提交的代码
     - name: pull new code
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3
     # 设置编译环境为nodejs-16.14.2
     - name: set Node.js 
       uses: actions/setup-node@v3
