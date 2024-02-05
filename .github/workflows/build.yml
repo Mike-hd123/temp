@@ -10,19 +10,17 @@ jobs:
     #步骤合集
     steps:
     # 拉取最新提交的代码
-    - name: pull new code
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
     # 设置编译环境为nodejs-16.14.2
-    - name: set Node.js 
-      uses: actions/setup-node@v3
+    - uses: actions/setup-node@v3
       with:
         node-version: '16.14.2'
     # 切换工作目录
-      run: cd nestjs
-      run: npm install
-      run: npm build
+    - run: cd nestjs
+    - run: npm install
+    - run: npm build
     # 切换工作目录
-      run: cd ../vuethree
-      run: npm install
-      run: npm build
+    - run: cd ../vuethree
+    - run: npm install
+    - run: npm build
     
