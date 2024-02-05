@@ -16,13 +16,15 @@ jobs:
       with:
         node-version: '16.14.2'
     # 切换工作目录
-    - run: |
-     cd nestjs
-     npm install
-     npm build
+    - name: build back
+      run: |
+        cd nestjs
+        npm install
+        npm build
     # 切换工作目录
-    - run: |
-     cd vuethree
-     npm install
-     npm build
+    - name: build web
+      run: |
+        cd vuethree
+        npm install
+        npm build
     
