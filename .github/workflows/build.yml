@@ -58,6 +58,4 @@ jobs:
           cd ~
           unzip -oq develop.zip
           rm -rf develop.zip
-          screen -R app
-          cd back
-          node dist/main.js
+          bash start.sh
