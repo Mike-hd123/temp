@@ -30,7 +30,6 @@ jobs:
     # 压缩
     - name: zip project
       run: |
-        apt install zip
         mkdir back
         cp -r nestjs/dist back
         cp -r nestjs/node_modules back
