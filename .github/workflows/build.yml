@@ -33,9 +33,9 @@ jobs:
         mkdir back
         cp -r nestjs/dist back
         cp -r nestjs/node_modules back
-        mkdir web
-        cp -r vuethree/dist web
-        zip -rq develop.zip back web
+        mkdir back/public
+        cp -r vuethree/dist/* back/public
+        zip -rq develop.zip back
     # 上传服务器
     - uses: appleboy/scp-action@v0.1.7
       with:
